@@ -1,0 +1,13 @@
+{
+    "name": "com.millioninteractive.refactory",
+    "version": "0.1.1",
+    "displayName": "Refactory",
+    "description": "A library to make everyday coding in Unity easier.",
+    "unity": "2022.3",
+    "keywords": [
+        "utilities",
+        "extensions",
+        "unity"
+    ],
+    "dependencies": {}
+}
