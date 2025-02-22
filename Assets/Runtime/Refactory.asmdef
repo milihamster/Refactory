@@ -1,6 +1,6 @@
 {
     "name": "Refactory",
-    "rootNamespace": "",
+    "rootNamespace": "Refactory",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
