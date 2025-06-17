@@ -1,13 +1,14 @@
 using UnityEngine;
 
-namespace Refactory.Controllers
+namespace Refactory.Managers
 {
     /// <summary>
-    /// Allows inheriting Classes to be called at any times, anywhere
+    /// Allows inheriting classes to be called at any time, anywhere,
+    /// independent from wether an instance of the class exists in the scene or not.
     /// An object of this class will be created automatically when it's called.
     /// </summary>
-    /// <typeparam name="T">Inheriting Class (e. g. AudioController)</typeparam>
-    public abstract class BaseController<T> : MonoBehaviour where T : BaseController<T>
+    /// <typeparam name="T">Inheriting Class (e. g. AudioManager)</typeparam>
+    public abstract class BaseManager<T> : MonoBehaviour where T : BaseManager<T>
     {
         private static T _instance;
 
@@ -18,12 +19,12 @@ namespace Refactory.Controllers
                 if (_instance == null)
                 {
                     // Find existing instance in the scene
-                    _instance = FindObjectOfType<T>();
+                    _instance = FindFirstObjectByType<T>();
 
                     // Create a new instance if one doesn't already exist
                     if (_instance == null)
                     {
-                        GameObject singletonObject = new GameObject("Controller");
+                        GameObject singletonObject = new GameObject("Manager");
                         _instance = singletonObject.AddComponent<T>();
 
                         // Make sure it persists between scenes
@@ -34,7 +35,7 @@ namespace Refactory.Controllers
             }
         }
 
-        private void Awake()
+        protected void Awake()
         {
             // If another instance exists, destroy it
             if (_instance != null && _instance != this)
@@ -45,7 +46,7 @@ namespace Refactory.Controllers
             {
                 _instance = (T)this;
                 DontDestroyOnLoad(gameObject);
-                // Set name so the controller is easily identifiable
+                // Set name so the manager is easily identifiable
                 name = this.GetType().Name;
             }
         }

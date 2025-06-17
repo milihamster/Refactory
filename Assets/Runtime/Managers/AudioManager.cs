@@ -1,15 +1,8 @@
-﻿using JetBrains.Annotations;
-using Refactory.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Refactory.Controllers
+namespace Refactory.Managers
 {
-    public class AudioController : BaseController<AudioController>
+    public class AudioManager : BaseManager<AudioManager>
     {
         private AudioSource _audioSource;
 
@@ -23,7 +16,7 @@ namespace Refactory.Controllers
             _audioSource.PlayOneShot(clip);
         }
         
-        public AudioSource CreateAudioSource(GameObject? targetGameObject = null)
+        public AudioSource CreateAudioSource(GameObject targetGameObject = null)
         {
             targetGameObject ??= gameObject;
             return targetGameObject.AddComponent<AudioSource>();
