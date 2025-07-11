@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Refactory.Assets.Runtime.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,9 +27,7 @@ namespace Refactory.Assets.Runtime.Extensions
         /// <param name="targetGameObject">Target GameObject</param>
         public static void DestroyChildren(this GameObject targetGameObject)
         {
-            // TODO: Make sure parent object isn't destroyed as well
-            foreach (Transform child in targetGameObject.transform)
-                UnityEngine.Object.Destroy(child.gameObject);
+            targetGameObject.transform.DestroyChildren();
         }
 
         /// <summary>
@@ -40,6 +39,24 @@ namespace Refactory.Assets.Runtime.Extensions
         public static bool HasComponent<T>(this GameObject targetGameObject) where T : Component
         {
             return targetGameObject.TryGetComponent<T>(out _);
+        }
+
+        /// <summary>
+        /// Moves a GameObject to to the current mouse position.
+        /// </summary>
+        /// <param name="targetGameObject">Target GameObject</param>
+        public static void MoveToMousePos(this GameObject targetGameObject)
+        {
+            targetGameObject.MoveToMousePos();
+        }
+
+        /// <summary>
+        /// Checks if the given position is occupied by anything but the given GameObject.
+        /// </summary>
+        /// <param name="targetGameObject">Target GameObject</param>
+        public static bool CheckIfPositionIsOccupied(this GameObject targetGameObject)
+        {
+            return Physics2dHelper.CheckIfPositionIsOccupied(targetGameObject.transform.position, targetGameObject);
         }
     }
 }
